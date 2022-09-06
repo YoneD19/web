@@ -1,5 +1,5 @@
 var r = new XMLHttpRequest();
-r.open("GET", "/"); 
+r.open("GET", "/",false); 
 r.onreadystatechange = function() { 
     if (r.readyState == 4){
         var res = r.response;
